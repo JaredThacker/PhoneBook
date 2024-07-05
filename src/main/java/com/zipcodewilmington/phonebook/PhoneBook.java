@@ -23,6 +23,9 @@ public class PhoneBook {
     }
 
     public void add(String name, String phoneNumber) {
+
+        phonebook.put(name, Collections.singletonList(phoneNumber));
+
 //        if(phonebook.containsKey(name)){
 //            List<String> phoneNums = phonebook.get(name);
 //            phoneNums.add(phoneNumber);
@@ -30,11 +33,12 @@ public class PhoneBook {
 //        } else {
 //            phonebook.put(name, new ArrayList<String>(List.of(phoneNumber)));
 //        }
-
-        phonebook.put(name, Collections.singletonList(phoneNumber));
     }
 
     public void addAll(String name, String... phoneNumbers) {
+
+        phonebook.put(name, Arrays.asList(phoneNumbers));
+
 //        if(phonebook.containsKey(name)){
 //            List<String> phoneNums = phonebook.get(name);
 //            phoneNums.addAll(Arrays.asList(phoneNumbers));
@@ -42,8 +46,6 @@ public class PhoneBook {
 //        } else {
 //            phonebook.put(name, new ArrayList<String>(List.of(phoneNumbers)));
 //        }
-
-        phonebook.put(name, Arrays.asList(phoneNumbers));
     }
 
     public void remove(String name) {
@@ -64,6 +66,14 @@ public class PhoneBook {
 
     public String reverseLookup(String phoneNumber)  {
 
+        String results = null;
+        for(Map.Entry<String, List<String>> entry : this.phonebook.entrySet()){
+            if(entry.getValue().contains(phoneNumber)) {
+                results = entry.getKey();
+            }
+        }
+        return results;
+
 //        for(Map.Entry<String, List<String>> entry: phonebook.entrySet()){
 //            String key = entry.getKey();
 //            List<String> value = entry.getValue();
@@ -72,14 +82,6 @@ public class PhoneBook {
 //            }
 //        }
 //        return "";
-
-        String results = null;
-        for(Map.Entry<String, List<String>> entry : this.phonebook.entrySet()){
-            if(entry.getValue().contains(phoneNumber)) {
-                results = entry.getKey();
-            }
-        }
-        return results;
     }
 
     public List<String> getAllContactNames() {
