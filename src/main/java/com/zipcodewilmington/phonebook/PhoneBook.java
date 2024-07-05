@@ -23,43 +23,44 @@ public class PhoneBook {
     }
 
     public void add(String name, String phoneNumber) {
-        if(this.phonebook.containsKey(name)){
-            List<String> phoneNums = this.phonebook.get(name);
+        if(phonebook.containsKey(name)){
+            List<String> phoneNums = phonebook.get(name);
             phoneNums.add(phoneNumber);
-            this.phonebook.put(name, phoneNums);
+            phonebook.put(name, phoneNums);
         } else {
-            this.phonebook.put(name, new ArrayList<String>(List.of(phoneNumber)));
+            phonebook.put(name, new ArrayList<String>(List.of(phoneNumber)));
         }
     }
 
     public void addAll(String name, String... phoneNumbers) {
-        if(this.phonebook.containsKey(name)){
-            List<String> phoneNums = this.phonebook.get(name);
+        if(phonebook.containsKey(name)){
+            List<String> phoneNums = phonebook.get(name);
             phoneNums.addAll(Arrays.asList(phoneNumbers));
-            this.phonebook.put(name, phoneNums);
+            phonebook.put(name, phoneNums);
         } else {
-            this.phonebook.put(name, new ArrayList<String>(List.of(phoneNumbers)));
+            phonebook.put(name, new ArrayList<String>(List.of(phoneNumbers)));
         }
 
     }
 
     public void remove(String name) {
-        this.phonebook.remove(name);
+        phonebook.remove(name);
     }
 
     public Boolean hasEntry(String name) {
-        return this.phonebook.containsKey(name);
+        return phonebook.containsKey(name);
     }
 
     public Boolean hasEntry(String name, String phoneNumber) {
-        return this.phonebook.get(name).contains(phoneNumber);
+        return phonebook.get(name).contains(phoneNumber);
     }
 
     public List<String> lookup(String name) {
-        return this.phonebook.get(name);
+        return phonebook.get(name);
     }
 
     public String reverseLookup(String phoneNumber)  {
+
         for(Map.Entry<String, List<String>> entry: phonebook.entrySet()){
             String key = entry.getKey();
             List<String> value = entry.getValue();
@@ -67,8 +68,8 @@ public class PhoneBook {
                 return key;
             }
         }
-
         return "";
+
     }
 
     public List<String> getAllContactNames() {
@@ -77,6 +78,6 @@ public class PhoneBook {
     }
 
     public Map<String, List<String>> getMap() {
-        return this.phonebook;
+        return phonebook;
     }
 }
